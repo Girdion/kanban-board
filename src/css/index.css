@@ -1,18 +1,6 @@
 @import "tailwindcss";
 
-@layer {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    background-repeat: no-repeat;
-  }
-
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
+@layer base {
   html {
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
