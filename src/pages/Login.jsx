@@ -1,15 +1,24 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (!email || !password)
-      toast.error("Please fill all the required fields!");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    console.log(email, password);
+  const handleLogin = () => {
+    if (!email || !password) {
+      toast.error("Please fill all the required fields!");
+      return;
+    }
+
+    localStorage.setItem("token", "abc-123");
+    navigate("/board");
   };
 
   return (
@@ -59,9 +68,12 @@ function Login() {
 
             <p className="text-center mt-6 text-base">
               <span className="text-[#aaaaaa]">no account? </span>
-              <span className="text-[#ff6b6b] font-bold cursor-pointer hover:underline">
+              <Link
+                to="/register"
+                className="text-[#ff6b6b] font-bold hover:underline"
+              >
                 register here
-              </span>
+              </Link>
             </p>
           </div>
         </div>

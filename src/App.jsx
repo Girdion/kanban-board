@@ -41,7 +41,7 @@ function App() {
           paddingLeft: "16px",
           paddingRight: "16px",
         }}
-        limit={1}
+        limit={3}
       />
     </>
   );
