@@ -1,11 +1,63 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    if (!username || !email || !password || !confPassword) {
+      toast.error("Please fill all the required fields!");
+      return;
+    }
+
+    if (username.length < 3) {
+      toast.error("Username must be at least 3 characters");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      toast.error("Username can only contain letters, numbers, and underscore");
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Invalid email format");
+      return;
+    }
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+      toast.error("Password must include uppercase, lowercase, and number");
+      return;
+    }
+
+    if (password !== confPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    const user = {
+      username,
+      email,
+      password,
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    toast.success("Registration successful!");
+
+    navigate("/login");
+  };
   return (
     <>
       <div className="flex justify-center items-center min-h-screen bg-[#0f0f1a] px-6 py-10">
@@ -27,6 +79,7 @@ function Register() {
                   placeholder="user123"
                   className="w-full bg-[#fdf6e3] text-[#111111] border-2 border-[#111111] px-3 py-2 text-lg shadow-[4px_4px_0px_#111111] focus:outline-none"
                   onChange={(e) => setUsername(e.target.value)}
+                  maxLength={20}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -66,7 +119,7 @@ function Register() {
                 className="mt-2 w-full border-2 border-[#ffeb3b] text-[#ffeb3b] py-2 text-lg shadow-[5px_5px_0px_#ffeb3b]
               hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none 
               active:translate-x-1.25 active:translate-y-1.25 active:shadow-none transition-all duration-100"
-                // onClick={handleLogin}
+                onClick={handleRegister}
               >
                 [ CREATE ACCOUNT ]
               </button>
