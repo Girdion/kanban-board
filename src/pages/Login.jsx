@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { login } from "../redux/auth/authSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,19 @@ function Login() {
       return;
     }
 
-    localStorage.setItem("token", "abc-123");
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!storedUser) {
+      toast.error("User not found");
+      return;
+    }
+
+    if (storedUser.email !== email || storedUser.password !== password) {
+      toast.error("Invalid email or password");
+      return;
+    }
+
+    dispatch(login({ user: { email }, token: "abc-123" }));
     navigate("/board");
   };
 

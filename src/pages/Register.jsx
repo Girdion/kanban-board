@@ -75,7 +75,7 @@ function Register() {
                   USERNAME
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   placeholder="user123"
                   className="w-full bg-[#fdf6e3] text-[#111111] border-2 border-[#111111] px-3 py-2 text-lg shadow-[4px_4px_0px_#111111] focus:outline-none"
                   onChange={(e) => setUsername(e.target.value)}
