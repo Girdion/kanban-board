@@ -1,7 +1,12 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 
 function Board() {
-  return <div>Board</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
 
 export default Board;
