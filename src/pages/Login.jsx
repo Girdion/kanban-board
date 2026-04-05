@@ -45,7 +45,13 @@ function Login() {
             LOGIN TO CONTINUE
           </p>
 
-          <div className="w-full max-w-sm mx-auto flex flex-col gap-4">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin();
+            }}
+            className="w-full max-w-sm mx-auto flex flex-col gap-4"
+          >
             <div className="flex flex-col gap-2">
               <label className="text-[#ffeb3b] text-2xl tracking-wider">
                 EMAIL
@@ -71,10 +77,10 @@ function Login() {
             </div>
 
             <button
+              type="submit"
               className="mt-2 w-full border-2 border-[#ffeb3b] text-[#ffeb3b] py-2 text-lg shadow-[5px_5px_0px_#ffeb3b]
               hover:translate-x-0.75 hover:translate-y-0.75 hover:shadow-none 
               active:translate-x-1.25 active:translate-y-1.25 active:shadow-none transition-all duration-100"
-              onClick={handleLogin}
             >
               [ LOGIN ]
             </button>
@@ -88,7 +94,7 @@ function Login() {
                 register here
               </Link>
             </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>
