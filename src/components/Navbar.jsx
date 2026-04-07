@@ -13,8 +13,6 @@ function Navbar() {
     navigate("/login");
   };
 
-  console.log(user);
-
   return (
     <div className="flex justify-between p-4 bg-[#0f0f1a] border-b-[#ffeb3b] border-b-8">
       <div className="flex gap-8 text-4xl text-[#ffeb3b] items-center">
